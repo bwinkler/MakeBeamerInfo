@@ -243,10 +243,10 @@ sub readNav {
     if( /\\beamer\@framepages\s*/gc ) {
       my ($begin, $end) = tex_parser( $_, 2 );
 
-      for ( my $i = $begin; $i < $end; $i++) {
+      $pages->{$begin} = { page => $begin, type => 'frame' };
+      for ( my $i = $begin+1; $i <= $end; $i++) {
         $pages->{$i} = { page => $i, type => 'increment' };
       }
-      $pages->{$end} = { page => $end, type => 'frame' };
     }
   }
   # go back to the top of the .nav file
